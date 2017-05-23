@@ -29,6 +29,10 @@ start_time = datetime.datetime.now()
 
 # Perform the test
 
+for val in oid:
+    if val != '.' and val.isdigit() == False:
+	pscheduler.fail('OID is not numeric.')
+
 error = None
 argv = ['snmpget']
 if version == '1' or version == '2c':
