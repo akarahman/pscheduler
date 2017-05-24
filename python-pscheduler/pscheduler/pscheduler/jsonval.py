@@ -503,6 +503,38 @@ __dictionary__ = {
         "additionalProperties": False
         },
 
+    "SNMPCounter32": {
+	"type": "integer",
+	"minimum": 0,
+        "maximum": 4294967296,
+	"pattern": r'^Counter32: \d*$' 
+        },
+
+    "SNMPCounter64": {
+	"type": "integer",
+	"minimum": 0,
+	"maximum": 8589934592,
+	"pattern": r'^Counter64: \d*$'
+	},
+
+    "SNMPGauge32": {
+	"type": "integer",
+	"minimum": 0,
+	"pattern": r'^Gauge32: \d*$'
+	},
+
+    "SNMPTimeTicks": {
+	"type": "integer",
+	"minimum": 0,
+	"maximum": 4294967296,
+	"pattern": r'^TimeTicks: \d*$'
+	},
+
+    "SNMPNsapAddress": {
+	"type": "integer",
+	"pattern": r'^: \d{8}$',
+	},
+
     "TaskSpecification": {
         "type": "object",
         "properties": {
