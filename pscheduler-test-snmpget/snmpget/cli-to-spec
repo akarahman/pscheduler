@@ -3,6 +3,8 @@
 # Convert command-line options to a test specification
 #
 
+import re
+import string
 import optparse
 import pscheduler
 import sys
@@ -60,7 +62,7 @@ opt_parser.add_option("--version",
                       dest="version")
 
 opt_parser.add_option("--oid",
-                      help="""List of OIDs to be queried, separated by commas without spaces. 
+                      help="""List of OIDs to be queried, separated by commas without spaces. OIDs must be exclusively numeric. 
                               Example:
                               --oid sysUpTime.0,ucdDemoUserList.0
                               """,
@@ -171,5 +173,18 @@ else:
     if options.context is not None:
       result['context'] = options.context
 
+#convert OIDs to numeric form
+argv = ["snmptranslate", "-On", "-IR"]
+oids = result['oid'].split(",")
+for i in oids: 
+    argv.append(i) 
+
+stdin, stdout, stderror = pscheduler.run_program(argv)
+if stdin != 0:
+    pscheduler.fail('Translation Error: Try using only numeric OIDs')
+result['oid'] = stdout
+formatted_result = re.sub(r"\n\n", ",", stdout)
+formatted_result = re.sub(r"\n", "", formatted_result)
+result['oid'] = formatted_result
 
 pscheduler.succeed_json(result)
