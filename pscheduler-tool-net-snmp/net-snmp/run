@@ -28,10 +28,27 @@ timeout = pscheduler.timedelta_as_seconds( pscheduler.iso8601_as_timedelta(timeo
 start_time = datetime.datetime.now()
 
 # Perform the test
-
+"""
 for val in oid:
     if val != '.' and val.isdigit() == False:
 	pscheduler.fail('OID is not numeric.')
+
+
+convertedOIDs = []
+for key in input['test']['spec'].keys():
+    if key == 'oid':
+        test-translate = ['snmptranslate', '-IR', oid]
+        try:
+            tr1 = run_program(test-translate)
+        except:
+            pass
+        
+        test-translate = ['snmptranslate', 'On', tr1]
+        try:
+            tr2 = run_program(test-translate)
+        except:
+            pscheduler.fail('Failed to translate OID to numeric form. Try entering the numeric form directly.')
+"""    	
 
 error = None
 argv = ['snmpget']
