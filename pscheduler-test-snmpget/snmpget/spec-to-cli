@@ -13,6 +13,12 @@ valid, message = spec_is_valid(spec)
 if not valid:
     pscheduler.fail(message)
 
+# concatenate oids
+oid_list = spec['oid']
+oid_str = ""
+for item in oid_list:
+    oid_str = "%s,%s" % (oid_str, item)
+spec['oid'] = oid_str
 
 result = pscheduler.speccli_build_args(spec, 
                                        strings=[
@@ -21,6 +27,7 @@ result = pscheduler.speccli_build_args(spec,
         ( 'host-node', 'host-node' ),
         ( 'dest', 'dest' ),
         ('oid', 'oid'),
+        ( 'protocol', 'protocol'),
         ('community', 'community'),
         ('version', 'version'),
         ( 'timeout', 'timeout' ),

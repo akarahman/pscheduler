@@ -25,6 +25,10 @@ def spec_is_valid(json):
                 "type": "string",
                 "enum": [ "noauthnopriv", "authnopriv", "authpriv"]
             },
+            "TransportProtocol": {
+                "type": "string",
+                "enum": ["tcp", "udp"]
+            },
             "SNMPv1Spec": {
                 "type": "object",
                 "properties": {
@@ -34,7 +38,8 @@ def spec_is_valid(json):
                     "dest":         { "$ref": "#/pScheduler/Host" },
                     "version":      { "$ref": "#/local/VersionNumber"},
                     "community":    { "$ref": "#/pScheduler/String"},
-                    "oid":          { "$ref": "#/pScheduler/String"},
+                    "oid":          { "$ref": "#/pScheduler/StringList"},
+                    "protocol":     { "$ref": "#/pScheduler/TransportProtocol" },
                     "timeout":      { "$ref": "#/pScheduler/Duration" },
                 },
                 "required": [
@@ -52,7 +57,8 @@ def spec_is_valid(json):
                     "host-node":    { "$ref": "#/pScheduler/Host" },
                     "dest":         { "$ref": "#/pScheduler/Host" },
                     "version":      { "$ref": "#/local/VersionNumber"},
-                    "oid":          { "$ref": "#/pScheduler/String"},
+                    "oid":          { "$ref": "#/pScheduler/StringList"},
+                    "protocol":     { "$ref": "#/pScheduler/TransportProtocol" },
                     "sn":           { "$ref": "#/pScheduler/String" },
                     "ap":           { "$ref": "#/local/AuthProtocol" },
                     "pp":           { "$ref": "#/local/PrivProtocol" },
@@ -87,7 +93,7 @@ def result_is_valid(json):
             "schema":     { "$ref": "#/pScheduler/Cardinal" },
             "succeeded":  { "$ref": "#/pScheduler/Boolean" },
             "time":   { "$ref": "#/pScheduler/Duration" },
-            "data":       { "$ref": "#/pScheduler/String"},
+            "data":       { "$ref": "#/pScheduler/SNMPResultList"},
             },
         "required": [
             "schema",

@@ -503,37 +503,72 @@ __dictionary__ = {
         "additionalProperties": False
         },
 
-    "SNMPCounter32": {
-	"type": "integer",
-	"minimum": 0,
-        "maximum": 4294967296,
-	"pattern": r'^Counter32: \d*$' 
+    "SNMPInteger": {
+        "type": { "$ref": "#/pScheduler/Int32"}
+    },
+
+    "SNMPInt32": {
+        "type": { "$ref": "#/pScheduler/Int32"}
+    },
+
+    "SNMPUInt32": {
+        "type": { "$ref": "#/pScheduler/UInt32"}
+    },
+
+    # can be one of bit, dec, hex, string
+    "SNMPString": {
+        "type": "string"
+    },
+
+    "SNMPIPAddr": {
+        "type": { "$ref": "#/pScheduler/IPAddress"}
+    },
+
+    "SNMPNumericOID": {
+        "type": "string",
+        "pattern": r'^((\.\d)|\d)+(\.\d+)*$'
+    },
+
+    "SNMPAlphaNumOID": {
+        "type": { "$ref": "#/pScheduler/SNMPString"}
+    },
+
+    "SNMPOID": {
+        "oneOf": [
+            { "$ref": "#/pScheduler/SNMPNumericOID" },
+            { "$ref": "#/pScheduler/SNMPAlphaNumOID"}
+        ]
+    },
+
+    "SNMPOIDList": {
+        "type": "array",
+        "items": { "$ref": "#/pScheduler/SNMPOID" }
+    },
+
+    "SNMPGetResult": {
+        "type": "object",
+        "properties": {
+            "oid": { "$ref": "#/pScheduler/SNMPOID" },
+            "type": { "$ref": "#/pScheduler/String"},
+            "value": { 
+                "oneOf": [
+                    { "$ref": "#/pScheduler/SNMPString" },
+                    { "$ref": "#/pScheduler/SNMPInteger"},
+                    { "$ref": "#/pScheduler/SNMPInt32" },
+                    { "$ref": "#/pScheduler/SNMPUInt32" },
+                    { "$ref": "#/pScheduler/SNMPOID" },
+                    # TODO: Add more
+                ]
+            } 
         },
+        "additionalProperties": True,
+        "required": ["oid", "value", "type"]
+    },
 
-    "SNMPCounter64": {
-	"type": "integer",
-	"minimum": 0,
-	"maximum": 8589934592,
-	"pattern": r'^Counter64: \d*$'
-	},
-
-    "SNMPGauge32": {
-	"type": "integer",
-	"minimum": 0,
-	"pattern": r'^Gauge32: \d*$'
-	},
-
-    "SNMPTimeTicks": {
-	"type": "integer",
-	"minimum": 0,
-	"maximum": 4294967296,
-	"pattern": r'^TimeTicks: \d*$'
-	},
-
-    "SNMPNsapAddress": {
-	"type": "integer",
-	"pattern": r'^: \d{8}$',
-	},
+    "SNMPResultList": {
+        "type": "array",
+        "items": { "$ref": "#/pScheduler/SNMPGetResult" }
+    },
 
     "TaskSpecification": {
         "type": "object",
