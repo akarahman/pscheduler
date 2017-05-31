@@ -182,9 +182,11 @@ for i in oids:
 stdin, stdout, stderror = pscheduler.run_program(argv)
 if stdin != 0:
     pscheduler.fail('Translation Error: Try using only numeric OIDs')
-result['oid'] = stdout
-formatted_result = re.sub(r"\n\n", ",", stdout)
-formatted_result = re.sub(r"\n", "", formatted_result)
-result['oid'] = formatted_result
+
+result['oid'] = []
+pattern = re.compile(r"\.[\d\.]+\d")
+for (oids) in re.findall(pattern, stdout):
+	result['oid'].append(oids)	
+
 
 pscheduler.succeed_json(result)
