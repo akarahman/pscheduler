@@ -157,10 +157,20 @@ printf 'TEST 24 - String Deltas\n'
 ARG=$(pscheduler task snmpget --dest demo.snmplabs.com --version 2c --community public --oid SNMPv2-MIB::sysName.0 --polls 3 | egrep '^https?://')
 results_delta 1 16
 
-printf 'TEST 24 - Integer Deltas\n'
+printf 'TEST 25 - Integer Deltas\n'
 ARG=$(pscheduler task snmpget --dest demo.snmplabs.com --version 2c --community public --oid SNMPv2-MIB::sysORUpTime.3 --polls 3 | egrep '^https?://')
 results_delta 1 22
 
-printf 'TEST 24 - Multiple Integer Deltas\n'
+printf 'TEST 26 - Multiple Integer Deltas\n'
 ARG=$(pscheduler task snmpget --dest demo.snmplabs.com --version 2c --community public --oid SNMPv2-MIB::sysORUpTime.1,SNMPv2-MIB::sysORUpTime.3 --polls 3 | egrep '^https?://')
 results_delta 2 22
+
+printf 'TEST 27 - OID Deltas\n'
+ARG=$(pscheduler task snmpget --dest demo.snmplabs.com --version 2c --community public --oid SNMPv2-MIB::sysORID.1 --polls 3 | egrep '^https?://')
+results_delta 1 16
+
+# other
+
+printf 'TEST 28 - OID Returned Value\n'
+ARG=$(pscheduler task snmpget --dest demo.snmplabs.com --version 2c --community public --oid SNMPv2-MIB::sysORID.1  | egrep '^https?://')
+results
