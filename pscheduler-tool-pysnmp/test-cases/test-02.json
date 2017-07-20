@@ -1,0 +1,15 @@
+{
+	"_comment": "This is a test for an SNMPDELTA query with a SINGLE VALID OID (INTEGER).",
+	"test": {
+		"type": "snmpdelta",
+		"spec": {
+			"schema": 1,
+			"dest": "localhost",
+			"_community": "public",
+			"version": "2c",
+			"oid": ["DISMAN-EVENT-MIB::sysUpTimeInstance"],
+			"polls": 5,
+			"period": 1
+		}
+	}
+}

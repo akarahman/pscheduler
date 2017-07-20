@@ -1,0 +1,14 @@
+{
+	"_comment": "This is a test for an SNMPGET query with an INVALID OID.",
+	"test": {
+		"type": "snmpdelta",
+		"spec": {
+			"schema": 1,
+			"dest": "localhost",
+			"_community": "public",
+			"version": "2c",
+			"oid": ["SNMPv2-MIB::sysORUpTime.10000"],
+			"polls": 1
+		}
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"_comment": "This is a test for an SNMPDELTA query with an INVALID/UNRESPONSIVE HOSTNAME.",
+	"test": {
+		"type": "snmpdelta",
+		"spec": {
+			"schema": 1,
+			"dest": "perfsonar-snmp-example.com",
+			"_community": "public",
+			"version": "2c",
+			"oid": ["DISMAN-EVENT-MIB::sysUpTimeInstance"],
+			"polls": 5,
+			"period": 1
+		}
+	}
+}

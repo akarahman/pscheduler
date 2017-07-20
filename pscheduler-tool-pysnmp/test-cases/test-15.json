@@ -1,0 +1,20 @@
+{
+	"_comment": "This is a test for an SNMPGET VERSION 3 query with MD5 AUTHENTICATION and DES encryption.",
+	"test": {
+		"type": "snmpget",
+		"spec": {
+			"schema": 1,
+			"dest": "demo.snmplabs.com",
+			"_community": "public",
+			"version": "3",
+			"security-name": "usr-md5-des",
+			"security-level": "authPriv",
+			"auth-protocol": "md5",
+			"priv-protocol": "des",
+			"_auth-key": "authkey1",
+			"_priv-key": "privkey1",
+			"oid": ["IF-MIB::ifInOctets.1"],
+			"polls": 1
+		}
+	}
+}

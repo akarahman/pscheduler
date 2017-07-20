@@ -1,0 +1,14 @@
+{
+	"_comment": "This is a test for an SNMPGET query with an INVALID COMMUNITY STRING.",
+	"test": {
+		"type": "snmpdelta",
+		"spec": {
+			"schema": 1,
+			"dest": "localhost",
+			"_community": "mystring",
+			"version": "2c",
+			"oid": ["DISMAN-EVENT-MIB::sysUpTimeInstance"],
+			"polls": 1
+		}
+	}
+}

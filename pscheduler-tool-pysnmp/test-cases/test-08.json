@@ -1,0 +1,14 @@
+{
+	"_comment": "This is a test for an SNMPGET query with MULTIPLE VALID OIDs with DIFFERENT DATA TYPES.",
+	"test": {
+		"type": "snmpget",
+		"spec": {
+			"schema": 1,
+			"dest": "localhost",
+			"_community": "public",
+			"version": "2c",
+			"oid": ["DISMAN-EVENT-MIB::sysUpTimeInstance", "SNMPv2-MIB::sysORDescr.3"],
+			"polls": 1
+		}
+	}
+}
